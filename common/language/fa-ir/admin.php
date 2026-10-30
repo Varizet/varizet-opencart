@@ -1,0 +1,56 @@
+<?php
+// Varizet admin strings (Persian).
+$_['heading_title']              = 'واریزت (کارت به کارت)';
+$_['text_extension']             = 'افزونه‌ها';
+$_['text_success']               = 'تنظیمات واریزت ذخیره شد.';
+$_['text_edit']                  = 'ویرایش واریزت';
+$_['text_varizet']               = '<a href="https://varizet.ir" target="_blank" rel="noopener">واریزت</a>';
+$_['text_mode_test']             = 'Test (آزمایشی)';
+$_['text_mode_live']             = 'Live (واقعی)';
+$_['text_unit_auto']             = 'تشخیص از کد ارز';
+$_['text_unit_irr']              = 'ریال';
+$_['text_unit_irt']              = 'تومان';
+$_['text_all_zones']             = 'همه مناطق';
+$_['text_webhook_url']           = 'آدرس وب‌هوک';
+$_['help_webhook_url']           = 'در پنل واریزت ← وب‌هوک‌ها این آدرس را با رویدادهای سفارش ثبت کنید و secret آن را در فیلد مربوط بگذارید.';
+$_['text_cron_url']              = 'آدرس کران (پشتیبان)';
+$_['help_cron_url']              = 'هر ۵ دقیقه این آدرس را فراخوانی کنید تا اگر وب‌هوک نرسید، وضعیت پرداخت‌ها همگام شود.';
+$_['tab_general']                = 'عمومی';
+$_['tab_status']                 = 'وضعیت سفارش';
+$_['entry_status']               = 'وضعیت';
+$_['entry_mode']                 = 'محیط';
+$_['entry_api_key_live']         = 'کلید API (Live)';
+$_['entry_api_key_test']         = 'کلید API (Test)';
+$_['entry_webhook_secret_live']  = 'Secret وب‌هوک (Live)';
+$_['entry_webhook_secret_test']  = 'Secret وب‌هوک (Test)';
+$_['entry_currency_unit']        = 'واحد پول فروشگاه';
+$_['entry_expires_in']           = 'مهلت پرداخت (ثانیه)';
+$_['entry_api_base_url']         = 'آدرس API (پیشرفته)';
+$_['entry_debug']                = 'لاگ اشکال‌زدایی';
+$_['entry_geo_zone']             = 'منطقه جغرافیایی';
+$_['entry_sort_order']           = 'ترتیب نمایش';
+$_['entry_order_status_pending'] = 'در انتظار پرداخت';
+$_['entry_order_status_paid']    = 'پرداخت‌شده';
+$_['entry_order_status_review']  = 'نیازمند بررسی / کم‌واریز';
+$_['entry_order_status_expired'] = 'منقضی‌شده';
+$_['entry_order_status_canceled'] = 'لغوشده';
+$_['entry_order_status_refunded'] = 'بازپرداخت‌شده';
+$_['help_api_key']               = 'پنل واریزت ← توسعه‌دهندگان ← کلیدهای API (دسترسی orders:read و orders:write).';
+$_['help_currency_unit']         = 'اگر کد ارز فروشگاه IRR یا IRT نیست، مشخص کنید مبالغ به ریال است یا تومان.';
+$_['help_expires_in']            = 'بین ۳۰۰ و ۸۶٬۴۰۰ ثانیه؛ پیش‌فرض ۱۸۰۰.';
+$_['help_api_base_url']          = 'خالی = https://api.varizet.ir';
+$_['button_check']               = 'بررسی اتصال';
+$_['text_check_ok']              = 'اتصال برقرار است: فروشگاه «%s»، حالت %s.';
+$_['error_check']                = 'اتصال ناموفق بود: %s';
+$_['error_check_mode']           = 'این کلید متعلق به حالت %s نیست.';
+$_['error_permission']           = 'هشدار: اجازه تغییر تنظیمات واریزت را ندارید.';
+$_['error_api_key']              = 'کلید API باید با vz_live_ یا vz_test_ شروع شود.';
+$_['error_api_key_required']     = 'کلید API محیط انتخاب‌شده را وارد کنید.';
+
+// one-click connect
+$_['button_connect']               = 'اتصال یک‌کلیکی به واریزت';
+$_['text_connect_help']            = 'کلید API و secret وب‌هوک خودکار ساخته و ذخیره می‌شوند؛ یا آن‌ها را دستی در فیلدهای زیر وارد کنید.';
+$_['text_connect_done']            = 'اتصال برقرار شد: فروشگاه «%s»، حالت %s. کلید و secret وب‌هوک ذخیره شدند.';
+$_['error_connect_cancelled']      = 'اتصال در پنل واریزت لغو شد.';
+$_['error_connect_expired']        = 'درخواست اتصال منقضی شده یا از این مرورگر شروع نشده است؛ دوباره «اتصال یک‌کلیکی» را بزنید.';
+$_['error_connect_exchange']       = 'واریزت کد اتصال را نپذیرفت؛ دوباره تلاش کنید یا کلید را دستی وارد کنید.';

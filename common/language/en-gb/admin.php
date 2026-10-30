@@ -1,0 +1,56 @@
+<?php
+// Varizet admin strings (English).
+$_['heading_title']              = 'Varizet (card-to-card)';
+$_['text_extension']             = 'Extensions';
+$_['text_success']               = 'Varizet settings saved.';
+$_['text_edit']                  = 'Edit Varizet';
+$_['text_varizet']               = '<a href="https://varizet.ir" target="_blank" rel="noopener">Varizet</a>';
+$_['text_mode_test']             = 'Test';
+$_['text_mode_live']             = 'Live';
+$_['text_unit_auto']             = 'From the currency code';
+$_['text_unit_irr']              = 'Rial';
+$_['text_unit_irt']              = 'Toman';
+$_['text_all_zones']             = 'All zones';
+$_['text_webhook_url']           = 'Webhook URL';
+$_['help_webhook_url']           = 'Register this URL with the order events in the Varizet panel → Webhooks and paste its secret below.';
+$_['text_cron_url']              = 'Cron URL (fallback)';
+$_['help_cron_url']              = 'Call this URL every 5 minutes so payments sync even if a webhook is missed.';
+$_['tab_general']                = 'General';
+$_['tab_status']                 = 'Order status';
+$_['entry_status']               = 'Status';
+$_['entry_mode']                 = 'Environment';
+$_['entry_api_key_live']         = 'API key (Live)';
+$_['entry_api_key_test']         = 'API key (Test)';
+$_['entry_webhook_secret_live']  = 'Webhook secret (Live)';
+$_['entry_webhook_secret_test']  = 'Webhook secret (Test)';
+$_['entry_currency_unit']        = 'Store currency unit';
+$_['entry_expires_in']           = 'Payment window (seconds)';
+$_['entry_api_base_url']         = 'API URL (advanced)';
+$_['entry_debug']                = 'Debug log';
+$_['entry_geo_zone']             = 'Geo zone';
+$_['entry_sort_order']           = 'Sort order';
+$_['entry_order_status_pending'] = 'Awaiting payment';
+$_['entry_order_status_paid']    = 'Paid';
+$_['entry_order_status_review']  = 'Needs review / underpaid';
+$_['entry_order_status_expired'] = 'Expired';
+$_['entry_order_status_canceled'] = 'Canceled';
+$_['entry_order_status_refunded'] = 'Refunded';
+$_['help_api_key']               = 'Varizet panel → Developers → API keys (orders:read and orders:write).';
+$_['help_currency_unit']         = 'If the store currency code is not IRR or IRT, say whether prices are in rial or toman.';
+$_['help_expires_in']            = '300 to 86,400 seconds; default 1800.';
+$_['help_api_base_url']          = 'Empty = https://api.varizet.ir';
+$_['button_check']               = 'Check connection';
+$_['text_check_ok']              = 'Connected: store "%s", %s mode.';
+$_['error_check']                = 'Connection failed: %s';
+$_['error_check_mode']           = 'This key does not belong to %s mode.';
+$_['error_permission']           = 'Warning: you do not have permission to modify Varizet.';
+$_['error_api_key']              = 'API keys start with vz_live_ or vz_test_.';
+$_['error_api_key_required']     = 'Enter the API key of the selected environment.';
+
+// one-click connect
+$_['button_connect']               = 'Connect to Varizet (one click)';
+$_['text_connect_help']            = 'Creates and stores the API key and webhook secret for you; or enter them below by hand.';
+$_['text_connect_done']            = 'Connected: store "%s", %s mode. The key and webhook secret were saved.';
+$_['error_connect_cancelled']      = 'The connection was cancelled in Varizet.';
+$_['error_connect_expired']        = 'The connect request expired or was not started from this browser; press «Connect» again.';
+$_['error_connect_exchange']       = 'Varizet did not accept the connect code; try again or enter the key by hand.';

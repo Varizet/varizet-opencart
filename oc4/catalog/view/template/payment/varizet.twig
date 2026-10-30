@@ -1,0 +1,22 @@
+<div class="varizet-payment" dir="{{ direction }}">
+  <p>{{ text_instruction }}</p>
+  <div class="text-end">
+    <button type="button" id="button-confirm" class="btn btn-primary">{{ button_confirm }}</button>
+  </div>
+  <div id="varizet-error" class="alert alert-danger mt-3 d-none"></div>
+</div>
+<script type="text/javascript"><!--
+$('#button-confirm').on('click', function () {
+  var element = this;
+  $.ajax({
+    url: '{{ confirm }}',
+    dataType: 'json',
+    beforeSend: function () { $(element).button('loading'); },
+    complete: function () { $(element).button('reset'); },
+    success: function (json) {
+      if (json.redirect) { location = json.redirect; }
+      if (json.error) { $('#varizet-error').text(json.error).removeClass('d-none'); }
+    }
+  });
+});
+//--></script>

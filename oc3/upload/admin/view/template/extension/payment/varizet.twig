@@ -1,0 +1,133 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-payment" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid" dir="{{ direction }}">
+    {% if error.warning %}<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error.warning }}</div>{% endif %}
+    {% if connect_success %}<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ connect_success }}</div>{% endif %}
+    {% if connect_error %}<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ connect_error }}</div>{% endif %}
+    <div class="well well-sm"><a href="{{ connect }}" class="btn btn-primary"><i class="fa fa-plug"></i> {{ button_connect }}</a> <span class="text-muted">{{ text_connect_help }}</span></div>
+    <div id="varizet-check-result"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3></div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            <li><a href="#tab-status" data-toggle="tab">{{ tab_status }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_varizet_status" class="form-control">
+                    <option value="1"{% if payment_varizet_status %} selected{% endif %}>{{ text_enabled }}</option>
+                    <option value="0"{% if not payment_varizet_status %} selected{% endif %}>{{ text_disabled }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_mode }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_varizet_mode" class="form-control">
+                    <option value="test"{% if payment_varizet_mode != 'live' %} selected{% endif %}>{{ text_mode_test }}</option>
+                    <option value="live"{% if payment_varizet_mode == 'live' %} selected{% endif %}>{{ text_mode_live }}</option>
+                  </select>
+                </div>
+              </div>
+              {% for field in ['api_key_live', 'api_key_test', 'webhook_secret_live', 'webhook_secret_test'] %}
+              {% set name = 'payment_varizet_' ~ field %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-{{ field }}">{{ attribute(_context, 'entry_' ~ field) }}</label>
+                <div class="col-sm-10">
+                  <input type="password" autocomplete="off" dir="ltr" name="{{ name }}" value="{{ attribute(_context, name) }}" id="input-{{ field }}" class="form-control"/>
+                  {% if field starts with 'api_key' %}<span class="help-block">{{ help_api_key }}</span>{% endif %}
+                  {% if attribute(error, field) %}<div class="text-danger">{{ attribute(error, field) }}</div>{% endif %}
+                </div>
+              </div>
+              {% endfor %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_webhook_url }}</label>
+                <div class="col-sm-10"><input type="text" readonly dir="ltr" value="{{ webhook_url }}" class="form-control" onclick="this.select()"/><span class="help-block">{{ help_webhook_url }}</span></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_cron_url }}</label>
+                <div class="col-sm-10"><input type="text" readonly dir="ltr" value="{{ cron_url }}" class="form-control" onclick="this.select()"/><span class="help-block">{{ help_cron_url }}</span>
+                  <input type="hidden" name="payment_varizet_cron_token" value="{{ payment_varizet_cron_token }}"/></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_currency_unit }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_varizet_currency_unit" class="form-control">
+                    {% for unit, label in {'auto': text_unit_auto, 'IRR': text_unit_irr, 'IRT': text_unit_irt} %}
+                    <option value="{{ unit }}"{% if payment_varizet_currency_unit == unit %} selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                  </select>
+                  <span class="help-block">{{ help_currency_unit }}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_expires_in }}</label>
+                <div class="col-sm-10"><input type="number" min="300" max="86400" dir="ltr" name="payment_varizet_expires_in" value="{{ payment_varizet_expires_in }}" class="form-control"/><span class="help-block">{{ help_expires_in }}</span></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_geo_zone }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_varizet_geo_zone_id" class="form-control">
+                    <option value="0">{{ text_all_zones }}</option>
+                    {% for geo_zone in geo_zones %}<option value="{{ geo_zone.geo_zone_id }}"{% if geo_zone.geo_zone_id == payment_varizet_geo_zone_id %} selected{% endif %}>{{ geo_zone.name }}</option>{% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sort_order }}</label>
+                <div class="col-sm-10"><input type="text" name="payment_varizet_sort_order" value="{{ payment_varizet_sort_order }}" class="form-control"/></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_api_base_url }}</label>
+                <div class="col-sm-10"><input type="text" dir="ltr" name="payment_varizet_api_base_url" value="{{ payment_varizet_api_base_url }}" placeholder="https://api.varizet.ir" class="form-control"/><span class="help-block">{{ help_api_base_url }}</span></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_debug }}</label>
+                <div class="col-sm-10"><select name="payment_varizet_debug" class="form-control"><option value="0">{{ text_disabled }}</option><option value="1"{% if payment_varizet_debug %} selected{% endif %}>{{ text_enabled }}</option></select></div>
+              </div>
+              <div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="button" id="varizet-check" class="btn btn-info">{{ button_check }}</button></div></div>
+            </div>
+            <div class="tab-pane" id="tab-status">
+              {% for which in status_fields %}
+              {% set name = 'payment_varizet_order_status_' ~ which %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ attribute(_context, 'entry_order_status_' ~ which) }}</label>
+                <div class="col-sm-10">
+                  <select name="{{ name }}" class="form-control">
+                    {% for order_status in order_statuses %}<option value="{{ order_status.order_status_id }}"{% if order_status.order_status_id == attribute(_context, name) %} selected{% endif %}>{{ order_status.name }}</option>{% endfor %}
+                  </select>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#varizet-check').on('click', function () {
+  $.post('{{ check }}', $('#form-payment').serialize(), function (json) {
+    $('#varizet-check-result').html('<div class="alert ' + (json.success ? 'alert-success' : 'alert-danger') + '">' + $('<div/>').text(json.success || json.error).html() + '</div>');
+  }, 'json');
+});
+//--></script>
+{{ footer }}
